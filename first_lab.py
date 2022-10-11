@@ -4,7 +4,7 @@
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# импорт пакетов
+# Импорт пакетов
 import math
 import numpy
 import matplotlib.pyplot as mpp
