@@ -9,13 +9,24 @@ def rabin_karp(text, pattern):
         for i in range(0, len(text)):
             result.append(i)
         return result
+        
+    hahash =0
+    tetext=0
 
-    hahash = hash(pattern)
-    for i in range(0, len(text) - len(pattern) + 1):
-        tetext = text[i: i+len(pattern)]
-        if hash(tetext) == hahash:
-            if tetext == pattern:
+    for i in range (0, len(pattern)):
+        hahash += ord(pattern[i])
+
+    for i in range (0, len(pattern)):
+        tetext += ord(text[i])
+
+    for i in range(len(text)- len(pattern)):
+
+        if tetext == hahash:
+            if text.startswith(pattern,i):
                 result.append(i)
+
+        tetext += (ord(text[i+len(pattern)]) - ord(text[i]))
+
     return result
 
 
