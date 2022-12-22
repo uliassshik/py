@@ -2,32 +2,34 @@ import unittest
 
 
 def rabin_karp(text, pattern):
+
     result = []
-    if text == '':
-        return []
-    if pattern == '':
-        for i in range(0, len(text)):
+    
+    if text != '' and pattern == '':
+        for i in range (len(text)):
             result.append(i)
-        return result
+    
+    if text != '' and pattern != '':
+        papattern = 0        
+        tetext = 0
         
-    hahash =0
-    tetext=0
+        for i in range (len(pattern)):
+            papattern += ord(pattern[i])
+            tetext += ord(text[i])
 
-    for i in range (0, len(pattern)):
-        hahash += ord(pattern[i])
+        sttstr = ''
+        for i in range (len(text) - len(pattern) + 1):
+            sttstr = text[i : i + len(pattern)]
+         
+            if i != 0:
+                tetext += ord(sttstr[-1]) 
+                tetext -= ord(text[i-1])
 
-    for i in range (0, len(pattern)):
-        tetext += ord(text[i])
-
-    for i in range(len(text)- len(pattern)):
-
-        if tetext == hahash:
-            if text.startswith(pattern,i):
-                result.append(i)
-
-        tetext += (ord(text[i+len(pattern)]) - ord(text[i]))
-
+            if tetext == papattern:
+                if sttstr == pattern:
+                    result.append(i)
     return result
+
 
 
 class RabinKarpTest(unittest.TestCase):
