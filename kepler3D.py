@@ -9,8 +9,8 @@ import itertools
 MODEL_G = 0.5  # гравитационная постоянная
 COLLISION_DISTANCE = 5.0
 COLLISION_COEFFICIENT = 50.0
-MODEL_DELTA_T = 0.01 # было 0.01
-TIME_TO_MODEL = 100 # было 100
+MODEL_DELTA_T = 0.01
+TIME_TO_MODEL = 100 
 
 # ABC это не алфавит, а AbstractBaseClass. Не даст создать экземпляр, пока не переопределишь все методы-заглушки
 class Universe(ABC):
@@ -133,7 +133,7 @@ for b in bodies:
 
 plt.show();
 
-# Проверим 2 закон Кеплера
+# 2 закон Кеплера
 
 def plt_kepler(same_fig = False):
     for b in bodies:
@@ -142,9 +142,9 @@ def plt_kepler(same_fig = False):
             for pos, vel in zip(b.ptrace, b.vtrace)
         ])
 
-        if not same_fig: # По картинке на тело
+        if not same_fig: # график на тело
             plt.show()
-    if same_fig: # Одна картинка на всех
+    if same_fig: # Один график на всех
         plt.show()
 
 plt_kepler() # Вывод на разных графиках
