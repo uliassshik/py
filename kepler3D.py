@@ -9,8 +9,8 @@ import itertools
 MODEL_G = 0.5  # гравитационная постоянная
 COLLISION_DISTANCE = 5.0
 COLLISION_COEFFICIENT = 50.0
-MODEL_DELTA_T = 1 # было 0.01
-TIME_TO_MODEL = 10000 # было 100
+MODEL_DELTA_T = 0.01 # было 0.01
+TIME_TO_MODEL = 100 # было 100
 
 # ABC это не алфавит, а AbstractBaseClass. Не даст создать экземпляр, пока не переопределишь все методы-заглушки
 class Universe(ABC):
@@ -120,7 +120,32 @@ for stepn in range(steps):
 
 
 # сетка для графика
-times = range(0, TIME_TO_MODEL, MODEL_DELTA_T)
+plt.gca().set_aspect('equal')
 
-plt.plot(times, u.bodies[0].areas, times, u.bodies[1].areas, times, u.bodies[2].areas)
-plt.show()
+for b in bodies:
+    # Вот так понятно
+    # t = b.ptrace
+    # xs = [p[0] for p in t]
+    # ys = [p[1] for p in t]
+    # plt.plot(xs, ys)
+    # А так — лихо. Кто объяснит? =)
+    plt.plot(*tuple(map(list, zip(*b.ptrace))))
+
+plt.show();
+
+# Проверим 2 закон Кеплера
+
+def plt_kepler(same_fig = False):
+    for b in bodies:
+        plt.plot([
+            numpy.cross(pos, vel * MODEL_DELTA_T)
+            for pos, vel in zip(b.ptrace, b.vtrace)
+        ])
+
+        if not same_fig: # По картинке на тело
+            plt.show()
+    if same_fig: # Одна картинка на всех
+        plt.show()
+
+plt_kepler() # Вывод на разных графиках
+plt_kepler(True) #На одном
