@@ -28,7 +28,6 @@ def vector_gauss(a, b):
 
         for j in range(i + 1, d):
             ab[j] = ab[j] - ab[i] * ab[j, i]
-    ...
     # запрограмируйте!
 
     # обратный
@@ -39,7 +38,6 @@ def vector_gauss(a, b):
 
     x = ab[:, -1]  # Последний столбец
     return x
-
 
 solution = vector_gauss(a, b)
 oob_solution = solve_out_of_the_box(a, b)
